@@ -27,8 +27,10 @@ class SinglePost extends Component {
           title: resData.post.title,
           author: resData.post.creator.name,
           date: new Date(resData.post.createdAt).toLocaleDateString('en-US'),
-          content: resData.post.content
-        });
+          content: resData.post.content,
+          image: `http://localhost:8080/${resData.post.imageUrl}`,
+          
+        })
       })
       .catch(err => {
         console.log(err);
@@ -36,6 +38,7 @@ class SinglePost extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <section className="single-post">
         <h1>{this.state.title}</h1>
