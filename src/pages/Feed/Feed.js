@@ -76,6 +76,29 @@ class Feed extends Component {
     });
   };
   loadPosts = (direction) => {
+    {
+      // for grapghql
+      fetch("http://localhost:8080/graphql", {
+        headers: {
+          "Content-Type": "application/json ",
+          Accept: "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          query: "{hello { text num}}",
+        }),
+      })
+        .then((res) => {
+          if (res.status !== 200) {
+            throw new Error("Failed to fetch posts.");
+          }
+          return res.json();
+        })
+        .then((resData) => {
+          console.log(resData);
+        })
+        .catch(this.catchError);
+    }
     if (direction) {
       this.setState({ postsLoading: true, posts: [] });
     }
